@@ -1,28 +1,49 @@
 <html>
   <body>
-    <?php
+    <pre>
 
-      // Définir la clé API dans une variable d'environnement
-      $api_key = getenv("0c0e7b2ac6b9afd4ee3aeb83a772ef7a&language=en-US");
-      // Construire l'URL de requête
-      $url =  "https://api.themoviedb.org/3/movie/5000?api_key=0c0e7b2ac6b9afd4ee3aeb83a772ef7a&language=en-US";
+      <?php
+        $api_key = "10617f57ee871819862ca005ccadefc45827d462";
+        $tableauBateauxMMSI = ["224001900" => 'ATYLA', "228000700" => 'ETOILE DU ROY', "228796000" => 'BELLE POULE', "205208000" => 'CROCUS', "205208000" => 'CROCUS'];
+        $tableauBateauxIMO = ["7821075" => 'DAR MLODZIEZY'];
 
-      // Initialiser la requête CURL
-      $curl = curl_init();
-      curl_setopt($curl, CURLOPT_URL, $url);
-      curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        foreach ($tableauBateauxMMSI as $id => $name){
+          $curl = curl_init();
+          curl_setopt($curl, CURLOPT_URL, "https://services.marinetraffic.com/api/exportvesseltrack/v:3/10617f57ee871819862ca005ccadefc45827d462/period:daily/days:3/mmsi:".$id."/protocol:xml");
+          curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
-      // Vérifier si la requête CURL a réussi
-      $data = file_get_contents($url);
-      $data = json_decode($data,true);
-      curl_close($curl);
-      
-      //Afficher la partie demander
-      $overview = $data['overview'];
-      var_dump($overview);
+          $xml = curl_exec($curl);
+          curl_close($curl);
 
-    ?>
-    <p> <?php echo $overview; ?> </p>
+          $xml = simplexml_load_string($xml, "SimpleXMLElement", LIBXML_NOCDATA);
+          $xml = json_encode($xml);
+          $xml = json_decode($xml, true);
+          $xml = $xml  ['POSITION'];
 
+          $item = isset ($xml ['@attributes']) ? $xml ['@attributes'] : $xml[sizeof($xml)-1] ['@attributes'];
+          echo $item['MMSI'] . "     :     " . $item['LON'] . "    :   " . $item['LAT'] .  "   :   " . $item['TIMESTAMP']. "   :   " . $name."<br>";
+                    
+        } 
+
+        foreach ($tableauBateauxMMSI as $id => $name){
+          $curl = curl_init();
+          curl_setopt($curl, CURLOPT_URL, "https://services.marinetraffic.com/api/exportvesseltrack/v:3/10617f57ee871819862ca005ccadefc45827d462/period:daily/days:3/imo:".$id."/protocol:xml");
+          curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+          $xml = curl_exec($curl);
+          curl_close($curl);
+
+          $xml = simplexml_load_string($xml, "SimpleXMLElement", LIBXML_NOCDATA);
+          $xml = json_encode($xml);
+          $xml = json_decode($xml, true);
+          $xml = $xml  ['POSITION'];
+
+          $item = isset ($xml ['@attributes']) ? $xml ['@attributes'] : $xml[sizeof($xml)-1] ['@attributes'];
+          echo $item['MMSI'] . "     :     " . $item['LON'] . "    :   " . $item['LAT'] .  "   :   " . $item['TIMESTAMP']. "   :   " . $name."<br>";
+                    
+        } 
+      ?>
+
+    </pre>
   </body>
 </html>
