@@ -9,7 +9,7 @@
 
         foreach ($tableauBateauxMMSI as $id => $name){
           $curl = curl_init();
-          curl_setopt($curl, CURLOPT_URL, "https://services.marinetraffic.com/api/exportvesseltrack/v:3/10617f57ee871819862ca005ccadefc45827d462/period:daily/days:3/mmsi:".$id."/protocol:xml");
+          curl_setopt($curl, CURLOPT_URL, "https://services.marinetraffic.com/api/exportvesseltrack/v:3/10617f57ee871819862ca005ccadefc45827d462/period:daily/days:10/mmsi:".$id."/protocol:xml");
           curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
           $xml = curl_exec($curl);
@@ -18,6 +18,10 @@
           $xml = simplexml_load_string($xml, "SimpleXMLElement", LIBXML_NOCDATA);
           $xml = json_encode($xml);
           $xml = json_decode($xml, true);
+          if (sizeof($xml) == 0){
+            continue;
+          }
+
           $xml = $xml  ['POSITION'];
 
           $item = isset ($xml ['@attributes']) ? $xml ['@attributes'] : $xml[sizeof($xml)-1] ['@attributes'];
@@ -25,6 +29,7 @@
                     
         } 
 
+        
         foreach ($tableauBateauxMMSI as $id => $name){
           $curl = curl_init();
           curl_setopt($curl, CURLOPT_URL, "https://services.marinetraffic.com/api/exportvesseltrack/v:3/10617f57ee871819862ca005ccadefc45827d462/period:daily/days:3/imo:".$id."/protocol:xml");
@@ -36,6 +41,10 @@
           $xml = simplexml_load_string($xml, "SimpleXMLElement", LIBXML_NOCDATA);
           $xml = json_encode($xml);
           $xml = json_decode($xml, true);
+          if (sizeof($xml) == 0){
+            continue;
+          }
+          var_dump($xml);
           $xml = $xml  ['POSITION'];
 
           $item = isset ($xml ['@attributes']) ? $xml ['@attributes'] : $xml[sizeof($xml)-1] ['@attributes'];
@@ -44,6 +53,9 @@
         } 
       ?>
 
+        
+
     </pre>
   </body>
 </html>
+
