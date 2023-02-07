@@ -1,124 +1,61 @@
 
 body {
-  margin: 0;
-  background-color: #1047ac;
-  overflow: hidden;
+  background: url('https://atelier-morgans.fr/2461-cover/bc-bf.jpg') center / cover no-repeat;
+	height: 100vh;
+	margin: 0;
+	display: flex;
+	justify-content: center;
 }
 
-nav {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  left: 0;
-  width: 319px;
-  display: table;
-  margin: 0 auto;
-  transform: translateY(-50%);
+.menu-bar {
+  border-radius: 25px;
+  height: fit-content;
+  display: inline-flex;
+  background-color: #A9A9A9;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  align-items: center;
+  padding: 0 10px;
+  margin: 50px 0 0 0;
 }
-
-nav a {
-  position: relative;
-  width: 33.333%;
-  display: table-cell;
-  text-align: center;
-  color: #949494;
-  text-decoration: none;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+.menu-bar li {
+  list-style: none;
+  color: rgb(255, 255, 255);
+  font-family: sans-serif;
   font-weight: bold;
-  padding: 10px 20px;
-  transition: 0.2s ease color;
+  padding: 12px 16px;
+  margin: 0 8px;
+  position: relative;
+  cursor: pointer;
+  white-space: nowrap;
 }
-
-nav a:before,
-nav a:after {
-  content: "";
+.menu-bar li::before {
+  content: " ";
   position: absolute;
-  border-radius: 50%;
-  transform: scale(0);
-  transition: 0.2s ease transform;
-}
-
-nav a:before {
   top: 0;
-  left: 10px;
-  width: 6px;
-  height: 6px;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  transition: 0.2s;
+  border-radius: 25px;
+}
+.menu-bar li:hover {
+  color: white;
+}
+.menu-bar li:hover::before {
+  background: linear-gradient(to bottom, #173bc4, #4FACF7);
+  box-shadow: 0px 3px 20px 0px white;
+  transform: scale(1.2);
 }
 
-nav a:after {
-  top: 5px;
-  left: 18px;
-  width: 4px;
-  height: 4px;
-}
-
-nav a:nth-child(1):before {
-  background-color: yellow;
-}
-
-nav a:nth-child(1):after {
-  background-color: red;
-}
-
-nav a:nth-child(2):before {
-  background-color: #00e2ff;
-}
-
-nav a:nth-child(2):after {
-  background-color: #89ff00;
-}
-
-nav a:nth-child(3):before {
-  background-color: purple;
-}
-
-nav a:nth-child(3):after {
-  background-color: palevioletred;
-}
-
-nav a:nth-child(4):before {
-    background-color: purple;
-  }
+#map {
+  width: 70%;
+  height: 400px;
+  background: #d6d6d6;
+  margin-top: 270px;
+  margin-left: -1000px;
   
-  nav a:nth-child(4):after {
-    background-color: palevioletred;
-  }
-
-#indicator {
-  position: absolute;
-  left: 5%;
-  bottom: 0;
-  width: 30px;
-  height: 3px;
-  background-color: #fff;
-  border-radius: 5px;
-  transition: 0.2s ease left;
+ 
 }
 
-nav a:hover {
-  color: #fff;
-}
-
-nav a:hover:before,
-nav a:hover:after {
-  transform: scale(1);
-}
-
-nav a:nth-child(1):hover ~ #indicator {
-  background: linear-gradient(130deg, yellow, red);
-}
-
-nav a:nth-child(2):hover ~ #indicator {
-  left: 34%;
-  background: linear-gradient(130deg, #00e2ff, #89ff00);
-}
-
-nav a:nth-child(3):hover ~ #indicator {
-  left: 70%;
-  background: linear-gradient(130deg, purple, palevioletred);
-}
-
-nav a:nth-child(4):hover ~ #indicator {
-    left: 70%;
-    background: linear-gradient(130deg, purple, palevioletred);
-  }
