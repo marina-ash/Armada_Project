@@ -1,61 +1,77 @@
 
 body {
-  background: url('https://atelier-morgans.fr/2461-cover/bc-bf.jpg') center / cover no-repeat;
-	height: 100vh;
-	margin: 0;
-	display: flex;
-	justify-content: center;
+  margin: 0;
+}
+
+
+
+.logo{
+   width : 500px;
+   height : auto;
+   display: block;
+   margin-right: auto;
+   margin-left: auto;
+   position: relative;  
+}
+
+header{
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   height: 9cm;
+}
+
+.fond-1{
+   background-image: url(img/fond-2.svg);
+   height: 1000px;
+   background-repeat: no-repeat;
+   background-size: cover;
+   position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: top;
+
+
 }
 
 .menu-bar {
-  border-radius: 25px;
-  height: fit-content;
-  display: inline-flex;
-  background-color: #A9A9A9;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  align-items: center;
-  padding: 0 10px;
-  margin: 50px 0 0 0;
+   border-radius: 50px;
+   height: fit-content;
+   display: inline-flex;
+   background-color: #ededed;
+   -webkit-backdrop-filter: blur(10px);
+   backdrop-filter: blur(10px);
+   align-items: center;
+   padding: 10px;
+   margin-top: -31px;
 }
 .menu-bar li {
-  list-style: none;
-  color: rgb(255, 255, 255);
-  font-family: sans-serif;
-  font-weight: bold;
-  padding: 12px 16px;
-  margin: 0 8px;
-  position: relative;
-  cursor: pointer;
-  white-space: nowrap;
+   list-style: none;
+   color: #042883;
+   font-family: sans-serif;
+   font-weight: bold;
+   padding: 12px 16px;
+   margin: 0 8px;
+   position: relative;
+   cursor: pointer;
+   white-space: nowrap;
 }
 .menu-bar li::before {
-  content: " ";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  z-index: -1;
-  transition: 0.2s;
-  border-radius: 25px;
+   content: " ";
+   position: absolute;
+   top: 0;
+   left: 0;
+   height: 100%;
+   width: 100%;
+   z-index: -1;
+   transition: 0.2s;
+   border-radius: 25px;
 }
 .menu-bar li:hover {
-  color: white;
+   color: #ededed;
 }
 .menu-bar li:hover::before {
-  background: linear-gradient(to bottom, #173bc4, #4FACF7);
-  box-shadow: 0px 3px 20px 0px white;
-  transform: scale(1.2);
+   background: linear-gradient(to bottom, #675443, #042883);
+   box-shadow: 0px 3px 20px 0px rgb(13, 13, 13);
+   transform: scale(1.2);
 }
-
-#map {
-  width: 70%;
-  height: 400px;
-  background: #d6d6d6;
-  margin-top: 270px;
-  margin-left: -1000px;
-  
- 
-}
-
