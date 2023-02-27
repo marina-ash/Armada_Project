@@ -22,7 +22,7 @@ header{
 }
 
 .fond-1{
-   background-image: url(img/fond-2.svg);
+   background-image: url(img/fond-1.svg);
    height: 1000px;
    background-repeat: no-repeat;
    background-size: cover;
@@ -75,3 +75,32 @@ header{
    box-shadow: 0px 3px 20px 0px rgb(13, 13, 13);
    transform: scale(1.2);
 }
+
+.fond-2{
+   background-image: url(img/fond-2.svg);
+   height: 1000px;
+   background-repeat: no-repeat;
+   background-size: cover;
+   position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: top;
+}
+.fond-3{
+   background-image: url(img/fond-3.svg);
+   height: 1000px;
+   background-repeat: no-repeat;
+   background-size: cover;
+   position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: top;
+}
+footer {
+
+}
+
+
+
+
+
