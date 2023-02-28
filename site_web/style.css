@@ -19,7 +19,23 @@ header{
    justify-content: center;
    align-items: center;
    height: 9cm;
+   width :100%;
 }
+
+h1{
+   text-align: center;
+   margin-top: 50px;
+   color: #042883;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+}
+
+h2{
+   text-align: center;
+   margin-top: 50px;
+   color: #042883;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+}
+
 
 .fond-1{
    background-image: url(img/fond-1.svg);
@@ -28,10 +44,7 @@ header{
    background-size: cover;
    position: relative;
    display: flex;
-   justify-content: center;
-   align-items: top;
-
-
+   flex-direction: column;
 }
 
 .menu-bar {
@@ -66,6 +79,7 @@ header{
    z-index: -1;
    transition: 0.2s;
    border-radius: 25px;
+   
 }
 .menu-bar li:hover {
    color: #ededed;
@@ -96,11 +110,48 @@ header{
    justify-content: center;
    align-items: top;
 }
-footer {
 
+.fond-4{
+   background-image: url(img/fond-4.svg);
+   height: 1000px;
+   background-repeat: no-repeat;
+   background-size: cover;
+   position: relative;
+   display: flex;
+   justify-content: center;
+   align-items: top;
+}
+footer {
+   margin-top: 950px;
 }
 
+ 
+ /* Blockquote main style */
+ .blockquote {
+     position: relative;
+     font-family: 'Montserrat', sans-serif;
+     font-weight: 800;
+     color: #A5C1D8;
+     padding: 39px 0;
+     z-index: 1;
+     align-self: center;
+     border-top: solid 1px;
+     border-bottom: solid 1px;
+     
+ }
+ 
+ /* Blockquote header */
+ .blockquote h1 {
+     position: relative;
+     font-size: 25px;
+     line-height: 1;
+     margin: 0;
+     text-align: center;
+      color: #050405;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+ }
+ 
 
-
+ 
 
 
