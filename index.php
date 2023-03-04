@@ -79,6 +79,8 @@
             echo $item['MMSI'] . "     :     " . $item['LON'] . "    :   " . $item['LAT'] .  "   :   " . $item['TIMESTAMP']. "   :   " . $name."<br>";
                         
           } 
+          
+          
 
       ?>
     </pre>
