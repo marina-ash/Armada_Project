@@ -6,7 +6,7 @@
           $servername ="172.18.214.149";
           $username = "ArmadaAdmin";
           $password = "btssnir";
-          $dbname = "armada_project";
+          $dbname = "armada_projet";
 
           $tableauBateauxMMSI = ["224001900" => 'Atyla', "228061110" => 'Bel Espoir', "228796000" => 'Belle Poule', "770576100" => 'Capitan Miranda', "205208000" => 'Crocus', "228797000" => 'Etoile', "228000700" => 'Etoile Du Roy', "227731000" => 'Etoile Molene', "8650796" => 'Hydrograaf', "227306100" => 'La Recouvrance', "205209000" => 'Lobelia', "227806500" => 'Mutin', "224123770" => 'Nao Victoria', "224534350" => 'Pascual Flores', "273452840" =>'Shtandart', "263804290" => 'VERA CRUZ'];
           $tableauBateauxIMO = ["8622983" => 'Belem', "8333635" => 'Atlantis', "9792319" => 'Bima Suci', "8107505" => '8107505', "7821075" => 'Dar Mlodziezy', "9648506" => 'Jeanne Barret', "5183120" => 'Le Francais', "5225514" => 'Marite', "5241659" => 'Morgenster', "5312628" => 'Santa Maria Manuela', "5339248" => 'STATSRAAD LEHMKUHL', "8101276" => 'Thalassa' ];
@@ -35,7 +35,7 @@
             }
             var_dump($xml);
         
-            $xml = $xml  ['POSITION'];
+            $xml = $xml['DATA']['POSITION'];
         
             $item = isset ($xml ['@attributes']) ? $xml ['@attributes'] : $xml[count($xml)-1] ['@attributes'];
             echo $item['LON'] . "    :   " . $item['LAT'] .  "   :   " . $item['TIMESTAMP']. "   :   " . $name."<br>";
@@ -67,9 +67,13 @@
             $xml = simplexml_load_string($xml, "SimpleXMLElement", LIBXML_NOCDATA);
             $xml = json_encode($xml);
             $xml = json_decode($xml, true);
+            
             if (empty($xml)){
               continue;
             }
+            var_dump($xml);
+        
+            $xml = $xml['DATA']['POSITION'];
             
             $item = isset ($xml ['@attributes']) ? $xml ['@attributes'] : $xml[count($xml)-1] ['@attributes'];
             echo $item['LON'] . "    :   " . $item['LAT'] .  "   :   " . $item['TIMESTAMP']. "   :   " . $name."<br>";
