@@ -2,17 +2,26 @@
     <body>
         <pre>
             <?php
-                $api_key = "prj_live_sk_5014c0483ac78ccca7ea5a847c0de989446ae828";
-                $curl = curl_init();
-                curl_setopt($curl, CURLOPT_URL, "https://services.marinetraffic.com/api/exportvesseltrack/v:3/10617f57ee871819862ca005ccadefc45827d462/period:daily/days:10/mmsi:".$id."/protocol:xml");
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        
-                $xml = curl_exec($curl);
-                curl_close($curl);
-        
-                $xml = simplexml_load_string($xml, "SimpleXMLElement", LIBXML_NOCDATA);
-                $xml = json_encode($xml);
-                $xml = json_decode($xml, true);
+                $api_key = "ce42de67371883f165af61fa1a53e660";
+                $queryString = http_build_query([
+                    'access_key' => 'ce42de67371883f165af61fa1a53e660',
+                    'query' => '1600 Pennsylvania Ave NW',
+                    'region' => 'Washington',
+                    'output' => 'json',
+                    'limit' => 1,
+                  ]);
+                  
+                  $curl = curl_init(sprintf('%s?%s', 'https://api.positionstack.com/v1/forward', $queryString));
+                  curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                  curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+                  
+                  $json = curl_exec($curl);
+                  
+                  curl_close($curl);
+                  
+                  $apiResult = json_decode($json, true);
+                  
+                  var_dump($apiResult);
             ?>
         </pre>
     </body>
