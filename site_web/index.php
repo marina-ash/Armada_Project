@@ -96,8 +96,9 @@
             $dbname = "armadaproj";    
         
             // Connexion à la base de données
-            $bdd = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-            $sql = "SELECT * FROM bateau";
+            $bdd = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
+            $bdd-> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+            $sql = "SELECT * FROM `bateau` where `id bateau` in (select max(`id bateau`) from `bateau` group by `name`)";
             $requete = $bdd->query($sql);
             $donnees = $requete->fetchAll(PDO::FETCH_ASSOC);
 
@@ -105,7 +106,13 @@
 
         <script>
             var map = L.map('map').setView([51.505, -0.09], 13);
-            var marker = L.marker(<?php echo " ['".$item['LON']."', '".$item['LAT']."']"?>).addTo(map);
+            let marker;
+            <?php foreach ($donnees as $row ): ?>
+                    marker = L.marker(['<?= $row["lon"] ?>','<?= $row["lat"] ?>']);
+                    marker.addTo(map);
+                    marker.bindPopup('<?= $row['name'] ?>').openPopup();
+            <?php endforeach; ?>
+            
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 maxZoom: 19,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
