@@ -13,53 +13,22 @@
          $dbname = "armadaproj";
  
          // Connexion à la base de données
-         $conn = mysqli_connect($servername, $username, $password, $dbname);
-         if (!$conn) {
-           die("Connection failed: " . mysqli_connect_error());
-         }
- 
-         foreach ($tableauBateauxMMSI as $idMMSI => $nameMMSI){
-           $curl = curl_init();
-           curl_setopt($curl, CURLOPT_URL, "https://services.marinetraffic.com/api/exportvesseltrack/v:3/$api_key/period:daily/days:1/mmsi:$idMMSI/protocol:xml");
-           curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-           curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE); // Vérifier la certification SSL et false pour la désactiver
- 
-           $xml = curl_exec($curl);
-           curl_close($curl);
- 
-           $xml = simplexml_load_string($xml, "SimpleXMLElement", LIBXML_NOCDATA);
-           $xml = json_encode($xml);
-           $xml = json_decode($xml, true);
- 
-           if (empty($xml)){
-             continue;
-           }
- 
-           $xml = $xml['POSITION'];
- 
-           $item = isset ($xml['@attributes']) ? $xml['@attributes'] : $xml[count($xml)-1]['@attributes'];
-           echo $item['MMSI'] . "     :     " . $item['LON'] . "    :   " . $item['LAT'] .  "   :   " . $item['TIMESTAMP']. "   :   " . $nameMMSI."<br>";
- 
-           $sql = "INSERT INTO bateau (name, lon, lat, timestamp) VALUES ('".$nameMMSI."','".$item['LON']."', '".$item['LAT']."', '".$item['TIMESTAMP']."')";
- 
-             if (mysqli_query($conn, $sql)) 
-             {
-                 echo "New record created successfully<br>";
-             } 
-             
-             else 
-             {
-                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-             }
-         }
-        
+        $dsn = "mysql:host=$servername;dbname=$dbname";
+        $options = array(
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+        );
+        try {
+            $conn = new PDO($dsn, $username, $password, $options);
+        } catch(PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+            exit;
+        }
 
-       
-        foreach ($tableauBateauxIMO as $idIMO => $nameIMO){
+        foreach ($tableauBateauxMMSI as $idMMSI => $nameMMSI){
           $curl = curl_init();
-          curl_setopt($curl, CURLOPT_URL, "https://services.marinetraffic.com/api/exportvesseltrack/v:3/9de816e3e2d89da6031822d6a82906c199c3378e/period:daily/days:1/imo:".$idIMO."/protocol:xml");
+          curl_setopt($curl, CURLOPT_URL, "https://services.marinetraffic.com/api/exportvesseltrack/v:3/$api_key/period:daily/days:1/mmsi:$idMMSI/protocol:xml");
           curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
+          curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE); // Vérifier la certification SSL et false pour la désactiver
 
           $xml = curl_exec($curl);
           curl_close($curl);
@@ -72,25 +41,67 @@
             continue;
           }
 
-          $xml = $xml  ['POSITION'];
+          $xml = $xml['POSITION'];
 
-          $item = isset ($xml ['@attributes']) ? $xml ['@attributes'] : $xml[count($xml)-1] ['@attributes'];
-          echo $item['MMSI'] . "     :     " . $item['LON'] . "    :   " . $item['LAT'] .  "   :   " . $item['TIMESTAMP']. "   :   " . $nameIMO."<br>";
-                   
-          $sql = "INSERT INTO bateau (name, lon, lat, timestamp) VALUES ('".$nameIMO."','".$item['LON']."', '".$item['LAT']."', '".$item['TIMESTAMP']."')";
-          
-          if (mysqli_query($conn, $sql)) 
-          {
-              echo "New record created successfully<br>";
-          } 
-          
-          else 
-          {
-             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+          $item = isset ($xml['@attributes']) ? $xml['@attributes'] : $xml[count($xml)-1]['@attributes'];
+          echo $item['MMSI'] . "     :     " . $item['LON'] . "    :   " . $item['LAT'] .  "   :   " . $item['TIMESTAMP']. "   :   " . $nameMMSI."<br>";
+
+          $sql = "INSERT INTO bateau (name, lon, lat, timestamp) VALUES (:nameMMSI, :lon, :lat, :timestamp)";
+
+            try {
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':nameMMSI', $nameMMSI);
+                $stmt->bindParam(':lon', $item['LON']);
+                $stmt->bindParam(':lat', $item['LAT']);
+                $stmt->bindParam(':timestamp', $item['TIMESTAMP']);
+                $stmt->execute();
+                echo "New record created successfully<br>";
+            } catch(PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
+        }
+  
+        
+
+       
+        foreach ($tableauBateauxIMO as $idIMO => $nameIMO){
+          $curl = curl_init();
+          curl_setopt($curl, CURLOPT_URL, "https://services.marinetraffic.com/api/exportvesseltrack/v:3/9de816e3e2d89da6031822d6a82906c199c3378e/period:daily/days:1/imo:".$idIMO."/protocol:xml");
+          curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+          curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE); // Vérifier la certification SSL et false pour la désactiver
+
+          $xml = curl_exec($curl);
+          curl_close($curl);
+
+          $xml = simplexml_load_string($xml, "SimpleXMLElement", LIBXML_NOCDATA);
+          $xml = json_encode($xml);
+          $xml = json_decode($xml, true);
+
+          if (empty($xml)){
+            continue;
           }
+
+          $xml = $xml['POSITION'];
+
+          $item = isset ($xml['@attributes']) ? $xml['@attributes'] : $xml[count($xml)-1]['@attributes'];
+          echo $item['MMSI'] . "     :     " . $item['LON'] . "    :   " . $item['LAT'] .  "   :   " . $item['TIMESTAMP']. "   :   " . $nameMMSI."<br>";
+
+          $sql = "INSERT INTO bateau (name, lon, lat, timestamp) VALUES (:nameMMSI, :lon, :lat, :timestamp)";
+
+            try {
+                $stmt = $conn->prepare($sql);
+                $stmt->bindParam(':nameMMSI', $nameMMSI);
+                $stmt->bindParam(':lon', $item['LON']);
+                $stmt->bindParam(':lat', $item['LAT']);
+                $stmt->bindParam(':timestamp', $item['TIMESTAMP']);
+                $stmt->execute();
+                echo "New record created successfully<br>";
+            } catch(PDOException $e) {
+                echo "Error: " . $e->getMessage();
+            }
         }
       ?>
-      
+
        
     </pre>
   </body>

@@ -156,7 +156,14 @@ footer {
    text-align: center;
    background-color: #A5C1D8;
 }
- 
+
+.map{
+   height: 700px;
+   width: 1044px;
+   margin-left: auto;
+   margin-right: auto;
+  
+}
 
  
 

@@ -4,10 +4,18 @@
         <meta charset="utf-8">
         <title>Armada</title>
         <link rel="stylesheet" href="style.css" type="text/css" media="screen">
-        <script async src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
+        <!-- Make sure you put this AFTER Leaflet's CSS -->
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+        crossorigin=""> </script>
+
 
     </head>
     <body >
+       
         <header>
             <header >
                 <img class="logo" src="img/logo.png">
@@ -48,8 +56,9 @@
         </div>
 
         <div class="fond-2">
-            <div id="carte Maps" class="maps">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2593.951219709821!2d1.127992216074804!3d49.447638966989075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e0dc19696d4369%3A0x3090d4f66068585e!2s66%20Rue%20du%20Dr%20Paul%20Helot%2C%2076000%20Rouen!5e0!3m2!1sfr!2sfr!4v1678205576645!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            
+            <div id="map" class="map">
+                
             </div>
 
         </div>
@@ -64,6 +73,13 @@
                 <div class="marina">
 
                 </div>
+
+                <div class="matthias">
+
+                </div>
+                <div class="djem">
+
+                </div>
             </div>
             
             <footer>
@@ -71,7 +87,30 @@
             </footer>
 
         </div>
+
+        <?php 
         
+            $servername ="localhost";
+            $username = "root";
+            $password = "";
+            $dbname = "armadaproj";    
+        
+            // Connexion à la base de données
+            $bdd = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+            $sql = "SELECT * FROM bateau";
+            $requete = $bdd->query($sql);
+            $donnees = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+        ?>
+
+        <script>
+            var map = L.map('map').setView([51.505, -0.09], 13);
+            var marker = L.marker(<?php echo " ['".$item['LON']."', '".$item['LAT']."']"?>).addTo(map);
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+        </script>
       
     </body>
 </html>
