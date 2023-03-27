@@ -1,169 +1,170 @@
 body {
-  margin: 0;
-}
-
-
-
-.logo{
-   width : 500px;
-   height : auto;
-   display: block;
-   margin-right: auto;
-   margin-left: auto;
-   position: relative;  
-}
-
-header{
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   height: 9cm;
-   width :100%;
-}
-
-h1{
-   text-align: center;
-   margin-top: 50px;
-   color: #042883;
-   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
-}
-
-h2{
-   text-align: center;
-   margin-top: 50px;
-   color: #042883;
-   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
-}
-
-
-.fond-1{
-   background-image: url(img/fond-1.svg);
-   height: 1000px;
-   background-repeat: no-repeat;
-   background-size: cover;
-   position: relative;
-   display: flex;
-   flex-direction: column;
-}
-
-a{
-   text-decoration: none;
-   color: #000;
-}
-
-.menu-bar {
-   border-radius: 50px;
-   height: fit-content;
-   display: inline-flex;
-
-   -webkit-backdrop-filter: blur(10px);
-   backdrop-filter: blur(10px);
-   align-items: center;
-   padding: 10px;
-   display: flex;
-   justify-content: center;
-}
-.menu-bar li {
-   list-style: none;
-   color: #042883;
-   font-family: sans-serif;
-   font-weight: bold;
-   padding: 12px 16px;
-   margin: 0 8px;
-   position: relative;
-   cursor: pointer;
-   white-space: nowrap;
-}
-.menu-bar li::before {
-   content: " ";
-   position: absolute;
-   top: 0;
-   left: 0;
-   height: 100%;
-   width: 100%;
-   z-index: -1;
-   transition: 0.2s;
-   border-radius: 25px;
-   
-}
-.menu-bar li:hover {
-   color: #ededed;
-}
-
-.menu-bar li:hover::before {
-   background: linear-gradient(to bottom, #ededed, #042883);
-   box-shadow: 0px 3px 20px 0px rgb(13, 13, 13);
-   transform: scale(1.2);
-}
-
-.fond-2{
-   background-image: url(img/fond-2.svg);
-   height: 1000px;
-   background-repeat: no-repeat;
-   background-size: cover;
-   position: relative;
-   display: flex;
-   justify-content: center;
-   align-items: top;
-}
-.fond-3{
-   background-image: url(img/fond-3.svg);
-   height: 1000px;
-   background-repeat: no-repeat;
-   background-size: cover;
-   position: relative;
-   display: flex;
-   justify-content: center;
-   align-items: top;
-}
-
-.fond-4{
-   background-image: url(img/fond-4.svg);
-   height: 1000px;
-   background-repeat: no-repeat;
-   background-size: cover;
-   position: relative;
-   display: flex;
-   justify-content: center;
-   align-items: top;
-}
-footer {
-   margin-top: 950px;
-}
-
-.blockquote {
-   position: relative;
-   font-family: 'Montserrat', sans-serif;
-   font-weight: 800;
-   color: #A5C1D8;
-   padding: 39px 0;
-   z-index: 1;
-   align-self: center;
-   border-top: solid 1px;
-   border-bottom: solid 1px;
-     
-}
+   margin: 0;
+ }
  
-.blockquote h1 {
-   position: relative;
-   font-size: 20px;
-   text-align: center;
-   color: #050405;
-   margin-left: 30px;
-   margin-right: 30px;
-   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
-   line-height: 2em;
-   text-align: center;
-   background-color: #A5C1D8;
-}
-
-.map{
-   height: 700px;
-   width: 1044px;
-   margin-left: auto;
-   margin-right: auto;
+ 
+ 
+ .logo{
+    width : 500px;
+    height : auto;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;  
+ }
+ 
+ header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 9cm;
+    width :100%;
+ }
+ 
+ h1{
+    text-align: center;
+    margin-top: 50px;
+    color: #042883;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+    
+ }
+ 
+ h2{
+    text-align: center;
+    margin-top: 50px;
+    color: #042883;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+ }
+ 
+ 
+ .fond-1{
+    background-image: url(img/fond-1.svg);
+    height: 1000px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+ }
+ 
+ a{
+    text-decoration: none;
+    color: #000;
+ }
+ 
+ .menu-bar {
+    border-radius: 50px;
+    height: fit-content;
+    display: inline-flex;
+ 
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    align-items: center;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+ }
+ .menu-bar li {
+    list-style: none;
+    color: #042883;
+    font-family: sans-serif;
+    font-weight: bold;
+    padding: 12px 16px;
+    margin: 0 8px;
+    position: relative;
+    cursor: pointer;
+    white-space: nowrap;
+ }
+ .menu-bar li::before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    transition: 0.2s;
+    border-radius: 25px;
+    
+ }
+ .menu-bar li:hover {
+    color: #ededed;
+ }
+ 
+ .menu-bar li:hover::before {
+    background: linear-gradient(to bottom, #ededed, #042883);
+    box-shadow: 0px 3px 20px 0px rgb(13, 13, 13);
+    transform: scale(1.2);
+ }
+ 
+ .fond-2{
+    background-image: url(img/fond-2.svg);
+    height: 1000px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+ }
+ .fond-3{
+    background-image: url(img/fond-3.svg);
+    height: 1000px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+ }
+ 
+ .fond-4{
+    background-image: url(img/fond-4.svg);
+    height: 1000px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+ }
+ footer {
+    margin-top: 950px;
+ }
+ 
+ .blockquote {
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    padding: 39px 0;
+    z-index: 1;
+    align-self: center;
+    text-align: justify;   
+ }
   
-}
+ .blockquote h1 {
+    position: relative;
+    font-size: 20px;
+    text-align: center;
+    color: #050405;
+    margin-left: 30px;
+    margin-right: 30px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+    line-height: 2em;
+    text-align: center;
+    background-color: #A5C1D8;
+ }
+ 
+ .map{
+    height: 652px;
+    width: 1050px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 6%;
+    border: 1em solid #ededed;
+   margin-top: 30px;
+   position: absolute;
+ }
 
  
 

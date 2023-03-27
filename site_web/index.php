@@ -57,8 +57,8 @@
 
         <div class="fond-2">
             
-            <div id="map" class="map">
-                
+            <div class="titremap">
+                <h1>Localiser les bateaux sur notre carte maps</h1>
             </div>
 
         </div>
@@ -89,32 +89,34 @@
         </div>
 
         <?php 
-        
+            
             $servername ="localhost";
-            $username = "root";
-            $password = "";
+            $username = "armada";
+            $password = "btssnir";
             $dbname = "armadaproj";    
         
             // Connexion à la base de données
             $bdd = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
             $bdd-> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-            $sql = "SELECT * FROM `bateau` where `id bateau` in (select max(`id bateau`) from `bateau` group by `name`)";
+            // Requete de trie de donnée 
+            $sql = "SELECT * FROM `bateau` where `id` in (select max(`id`) from `bateau` group by `name`)";
             $requete = $bdd->query($sql);
             $donnees = $requete->fetchAll(PDO::FETCH_ASSOC);
 
         ?>
 
         <script>
-            var map = L.map('map').setView([51.505, -0.09], 13);
+        
+            var map = L.map('map').setView([50.06, 1.49], 13); // zonne d'affiche de maps
             let marker;
             <?php foreach ($donnees as $row ): ?>
-                    marker = L.marker(['<?= $row["lon"] ?>','<?= $row["lat"] ?>']);
+                    marker = L.marker(['<?= $row["lat"] ?>','<?= $row["lon"] ?>']); // mettre un marker sur la position du bateau
                     marker.addTo(map);
-                    marker.bindPopup('<?= $row['name'] ?>').openPopup();
+                    marker.bindPopup('<?= $row['name'] ?>').openPopup(); // afficher le nom du bateau
             <?php endforeach; ?>
             
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 19,
+                maxZoom: 20,
                 attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
         </script>

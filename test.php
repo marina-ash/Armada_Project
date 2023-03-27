@@ -1,109 +1,125 @@
-​<html>
-  <body>
-    <pre>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Armada</title>
+        <link rel="stylesheet" href="style.css" type="text/css" media="screen">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+        crossorigin=""/>
+        <!-- Make sure you put this AFTER Leaflet's CSS -->
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+        crossorigin=""> </script>
 
-      <?php
-  
-        
-        $api_key = "9de816e3e2d89da6031822d6a82906c199c3378e";
-        $tableauBateauxMMSI = ["228000700" => 'Etoile Du Roy'];
-        $tableauBateauxIMO = ["7821075" => 'DAR MLODZIEZY'];
-        $servername ="localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "armadaproj";
 
-        // Connexion à la base de données
-        $dsn = "mysql:host=$servername;dbname=$dbname";
-        $options = array(
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-        );
-        try {
-            $conn = new PDO($dsn, $username, $password, $options);
-        } catch(PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
-            exit;
-        }
-
-        foreach ($tableauBateauxMMSI as $idMMSI => $nameMMSI){
-          $curl = curl_init();
-          curl_setopt($curl, CURLOPT_URL, "https://services.marinetraffic.com/api/exportvesseltrack/v:3/$api_key/period:daily/days:1/mmsi:$idMMSI/protocol:xml");
-          curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE); // Vérifier la certification SSL et false pour la désactiver
-
-          $xml = curl_exec($curl);
-          curl_close($curl);
-
-          $xml = simplexml_load_string($xml, "SimpleXMLElement", LIBXML_NOCDATA);
-          $xml = json_encode($xml);
-          $xml = json_decode($xml, true);
-
-          if (empty($xml)){
-            continue;
-          }
-
-          $xml = $xml['POSITION'];
-
-          $item = isset ($xml['@attributes']) ? $xml['@attributes'] : $xml[count($xml)-1]['@attributes'];
-          echo $item['MMSI'] . "     :     " . $item['LON'] . "    :   " . $item['LAT'] .  "   :   " . $item['TIMESTAMP']. "   :   " . $nameMMSI."<br>";
-
-          $sql = "INSERT INTO bateau (name, lon, lat, timestamp) VALUES (:nameMMSI, :lon, :lat, :timestamp)";
-
-            try {
-                $stmt = $conn->prepare($sql);
-                $stmt->bindParam(':nameMMSI', $nameMMSI);
-                $stmt->bindParam(':lon', $item['LON']);
-                $stmt->bindParam(':lat', $item['LAT']);
-                $stmt->bindParam(':timestamp', $item['TIMESTAMP']);
-                $stmt->execute();
-                echo "New record created successfully<br>";
-            } catch(PDOException $e) {
-                echo "Error: " . $e->getMessage();
-            }
-        }
-  
-        
-
+    </head>
+    <body >
        
-        foreach ($tableauBateauxIMO as $idIMO => $nameIMO){
-          $curl = curl_init();
-          curl_setopt($curl, CURLOPT_URL, "https://services.marinetraffic.com/api/exportvesseltrack/v:3/9de816e3e2d89da6031822d6a82906c199c3378e/period:daily/days:1/imo:".$idIMO."/protocol:xml");
-          curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-          curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE); // Vérifier la certification SSL et false pour la désactiver
+        <header>
+            <header >
+                <img class="logo" src="img/logo.png">
+            </header>
+        </header>  
 
-          $xml = curl_exec($curl);
-          curl_close($curl);
+        <div class="fond-1">
+            <div id="bar">
+                <ul class="menu-bar">
+                    <li><a href="#">Accueil</a></li>
+                    <li><a href="#">Carte Maps</a></li>
+                    <li><a href="#">Réservations</a></li>
+                    <li><a href="#">Qui sommes nous?</a></li>
+                </ul>
+            </div>
+            <div id="boxes">
+                <div id="colonne1">
+                    <h1> 
+                        L’ARMADA, UN PEU D’HISTOIRE, LA NAISSANCE D’UN GRAND ÉVÉNEMENT 
+                    </h1>
+                </div>
+                <div class="blockquote-wrapper">
+                    <div class="blockquote">
+                      <h1>
+                        Bienvenue sur notre site web dédié aux bateaux de l'armada ! Ici, vous pouvez découvrir la localisation en temps réel de tous les bateaux, et même réserver votre place à bord de l'un d'entre eux. Que vous soyez un passionné de navigation ou simplement à la recherche d'une expérience unique, nous sommes ravis de vous offrir un accès privilégié à cet événement exceptionnel. Notre équipe est à votre disposition pour vous guider et vous aider à profiter au maximum de votre visite. Nous vous souhaitons une excellente découverte de notre site et espérons vous voir bientôt à bord de l'un des bateaux de l'armada !
+                      </h1>
+                    </div>
+                </div>
+                <div id="colonne3">
+                    <h2>
+                        L’ARMADA : UNE RÉUSSITE DEPUIS 30 ANS : DÉJÀ 6 ÉDITIONS !
+                    </h2>
+                </div>
+                
+            </div>
+            
+            
+        </div>
 
-          $xml = simplexml_load_string($xml, "SimpleXMLElement", LIBXML_NOCDATA);
-          $xml = json_encode($xml);
-          $xml = json_decode($xml, true);
+        <div class="fond-2">
+            
+            <div id="map" class="map">
+                
+            </div>
 
-          if (empty($xml)){
-            continue;
-          }
+        </div>
 
-          $xml = $xml['POSITION'];
+        <div class="fond-3">
+            <div id="Réservations" class="réservation"></div>
+        </div>
 
-          $item = isset ($xml['@attributes']) ? $xml['@attributes'] : $xml[count($xml)-1]['@attributes'];
-          echo $item['MMSI'] . "     :     " . $item['LON'] . "    :   " . $item['LAT'] .  "   :   " . $item['TIMESTAMP']. "   :   " . $nameMMSI."<br>";
+        <div class="fond-4">
 
-          $sql = "INSERT INTO bateau (name, lon, lat, timestamp) VALUES (:nameMMSI, :lon, :lat, :timestamp)";
+            <div id="Qui sommes nous?" class="nous">
+                <div class="marina">
 
-            try {
-                $stmt = $conn->prepare($sql);
-                $stmt->bindParam(':nameMMSI', $nameMMSI);
-                $stmt->bindParam(':lon', $item['LON']);
-                $stmt->bindParam(':lat', $item['LAT']);
-                $stmt->bindParam(':timestamp', $item['TIMESTAMP']);
-                $stmt->execute();
-                echo "New record created successfully<br>";
-            } catch(PDOException $e) {
-                echo "Error: " . $e->getMessage();
-            }
-        }
-      ?>
+                </div>
 
-       
-    </pre>
-  </body>
+                <div class="matthias">
+
+                </div>
+                <div class="djem">
+
+                </div>
+            </div>
+            
+            <footer>
+                <p>Copyright @2023 | Designed With by Marina ASHRAF MORIS</p>
+            </footer>
+
+        </div>
+
+        <?php 
+            
+            $servername ="localhost";
+            $username = "armada";
+            $password = "btssnir";
+            $dbname = "armadaproj";    
+        
+            // Connexion à la base de données
+            $bdd = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
+            $bdd-> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+            // Requete de trie de donnée 
+            $sql = "SELECT * FROM `bateau` where `id` in (select max(`id`) from `bateau` group by `name`)";
+            $requete = $bdd->query($sql);
+            $donnees = $requete->fetchAll(PDO::FETCH_ASSOC);
+
+        ?>
+
+        <script>
+        
+            var map = L.map('map').setView([50.06, 1.49], 13); // zonne d'affiche de maps
+            let marker;
+            <?php foreach ($donnees as $row ): ?>
+                    marker = L.marker(['<?= $row["lat"] ?>','<?= $row["lon"] ?>']); // mettre un marker sur la position du bateau
+                    marker.addTo(map);
+                    marker.bindPopup('<?= $row['name'] ?>').openPopup(); // afficher le nom du bateau
+            <?php endforeach; ?>
+            
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 20,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+        </script>
+      
+    </body>
 </html>
