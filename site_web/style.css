@@ -156,15 +156,15 @@ body {
  }
  
  .map{
-    height: 652px;
-    width: 1050px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 6%;
-    border: 1em solid #ededed;
-   margin-top: 30px;
-   position: absolute;
- }
+   height: 652px;
+   width: 1050px;
+   margin-left: auto;
+   margin-right: auto;
+   border-radius: 6%;
+   border: 1em solid #ededed;
+  margin-top: 30px;
+  position: absolute;
+}
 
  
 
