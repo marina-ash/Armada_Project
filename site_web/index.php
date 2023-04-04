@@ -22,15 +22,15 @@
             </header>
         </header>  
 
-        <div class="fond-1">
-            <div id="bar">
+        <div class="fond-1" id="accueil">
+            <nav id="bar">
                 <ul class="menu-bar">
-                    <li><a href="#">Accueil</a></li>
-                    <li><a href="#">Carte Maps</a></li>
-                    <li><a href="#">Réservations</a></li>
-                    <li><a href="#">Qui sommes nous?</a></li>
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#carte">Carte Maps</a></li>
+                    <li><a href="#reservation">Réservations</a></li>
+                    <li><a href="#presentation">Qui sommes nous?</a></li>
                 </ul>
-            </div>
+            </nav>
             <div id="boxes">
                 <div id="colonne1">
                     <h1> 
@@ -45,9 +45,9 @@
                     </div>
                 </div>
                 <div id="colonne3">
-                    <h2>
+                    <h1>
                         L’ARMADA : UNE RÉUSSITE DEPUIS 30 ANS : DÉJÀ 6 ÉDITIONS !
-                    </h2>
+                    </h1>
                 </div>
                 
             </div>
@@ -55,32 +55,85 @@
             
         </div>
 
-        <div class="fond-2">
+        <div class="fond-2" id="carte">
+
+           
+            <h2>les positions de nos bateaux sur notre carte</h2>
+             
             
-            <div class="titremap">
-                <h1>Localiser les bateaux sur notre carte maps</h1>
+            <div id="map" class="map">
+                
             </div>
 
         </div>
 
-        <div class="fond-3">
+        <div class="fond-3" id="reservation">
             <div id="Réservations" class="réservation"></div>
         </div>
 
-        <div class="fond-4">
+        <div class="fond-4" id= "presentation">
 
-            <div id="Qui sommes nous?" class="nous">
-                <div class="marina">
-
+            <section class="articles">
+            <article>
+                <div class="article-wrapper">
+                    <figure>
+                        <img src="https://picsum.photos/id/1011/800/450" alt="" />
+                    </figure>
+                    <div class="article-body">
+                        <h2>This is some title</h2>
+                        <p>
+                        Curabitur convallis ac quam vitae laoreet. Nulla mauris ante, euismod sed lacus sit amet, congue bibendum eros. Etiam mattis lobortis porta. Vestibulum ultrices iaculis enim imperdiet egestas.
+                        </p>
+                        <a href="#" class="read-more">
+                        Read more <span class="sr-only">about this is some title</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        </a>
+                    </div>
                 </div>
+            </article>
+            <article>
 
-                <div class="matthias">
-
+                <div class="article-wrapper">
+                    <figure>
+                        <img src="https://picsum.photos/id/1005/800/450" alt="" />
+                    </figure>
+                    <div class="article-body">
+                        <h2>This is some title</h2>
+                        <p>
+                        Curabitur convallis ac quam vitae laoreet. Nulla mauris ante, euismod sed lacus sit amet, congue bibendum eros. Etiam mattis lobortis porta. Vestibulum ultrices iaculis enim imperdiet egestas.
+                        </p>
+                        <a href="#" class="read-more">
+                        Read more <span class="sr-only">about this is some title</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        </a>
+                    </div>
                 </div>
-                <div class="djem">
+            </article>
+            <article>
 
+                <div class="article-wrapper">
+                    <figure>
+                        <img src="https://picsum.photos/id/103/800/450" alt="" />
+                    </figure>
+                    <div class="article-body">
+                        <h2>This is some title</h2>
+                        <p>
+                        Curabitur convallis ac quam vitae laoreet. Nulla mauris ante, euismod sed lacus sit amet, congue bibendum eros. Etiam mattis lobortis porta. Vestibulum ultrices iaculis enim imperdiet egestas.
+                        </p>
+                        <a href="#" class="read-more">
+                        Read more <span class="sr-only">about this is some title</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                        </a>
+                    </div>
                 </div>
-            </div>
+            </article>
+            </section>
             
             <footer>
                 <p>Copyright @2023 | Designed With by Marina ASHRAF MORIS</p>
