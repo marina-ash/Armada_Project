@@ -1,31 +1,20 @@
-​<html>
+​<?php
+ include('connexionbdd.php');
+ ?>
+ 
+<html>
   <body>
     <pre>
 
       <?php
       
-        
+     
         $api_key = "9de816e3e2d89da6031822d6a82906c199c3378e";
         /*$tableauBateauxMMSI = ["224001900" => 'Atyla', "228061110" => 'Bel Espoir', "228796000" => 'Belle Poule', "770576100" => 'Capitan Miranda', "205208000" => 'Crocus', "228797000" => 'Etoile', "228000700" => 'Etoile Du Roy', "227731000" => 'Etoile Molene', "8650796" => 'Hydrograaf', "227306100" => 'La Recouvrance', "205209000" => 'Lobelia', "227806500" => 'Mutin', "224123770" => 'Nao Victoria', "224534350" => 'Pascual Flores', "273452840" =>'Shtandart', "263804290" => 'VERA CRUZ'];
         $tableauBateauxIMO = ["8622983" => 'Belem', "8333635" => 'Atlantis', "9792319" => 'Bima Suci', "8107505" => '8107505', "7821075" => 'Dar Mlodziezy', "9648506" => 'Jeanne Barret', "5183120" => 'Le Francais', "5225514" => 'Marite', "5241659" => 'Morgenster', "5312628" => 'Santa Maria Manuela', "5339248" => 'STATSRAAD LEHMKUHL', "8101276" => 'Thalassa' ];*/
         $tableauBateauxMMSI = ["224001900" => 'Atyla', "228061110" => 'Bel Espoir'];
         $tableauBateauxIMO = ["8622983" => 'Belem', "8333635" => 'Atlantis'];
-        $servername ="localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "armadaproj";
- 
-         // Connexion à la base de données
-         $dsn = "mysql:host=$servername;dbname=$dbname";
-         $options = array(
-             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-         );
-         try {
-             $conn = new PDO($dsn, $username, $password, $options);
-         } catch(PDOException $e) {
-             echo "Connection failed: " . $e->getMessage();
-             exit;
-         }
+        
  
          foreach ($tableauBateauxMMSI as $idMMSI => $nameMMSI){
            $curl = curl_init();
@@ -54,7 +43,7 @@
            $sql = "INSERT INTO bateau (name, lat, lon, timestamp) VALUES (:nameMMSI, :lat, :lon, :timestamp)";
  
              try {
-                 $stmt = $conn->prepare($sql);
+                 $stmt = $bdd->prepare($sql);
                  $stmt->bindParam(':nameMMSI', $nameMMSI);
                  $stmt->bindParam(':lat', $item['LAT']);
                  $stmt->bindParam(':lon', $item['LON']);
@@ -96,7 +85,7 @@
            $sql = "INSERT INTO bateau (name, lat, lon, timestamp) VALUES (:nameIMO, :lat, :lon, :timestamp)";
  
              try {
-                 $stmt = $conn->prepare($sql);
+                 $stmt = $bdd->prepare($sql);
                  $stmt->bindParam(':nameIMO', $nameIMO);
                  $stmt->bindParam(':lat', $item['LAT']);
                  $stmt->bindParam(':lon', $item['LON']);

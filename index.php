@@ -1,3 +1,6 @@
+<?php
+ include('connexionbdd.php');
+ ?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -142,15 +145,8 @@
         </div>
 
         <?php 
-            
-            $servername ="localhost";
-            $username = "armada";
-            $password = "btssnir";
-            $dbname = "armadaproj";    
-        
-            // Connexion à la base de données
-            $bdd = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8", $username, $password);
-            $bdd-> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+           
+          
             // Requete de trie de donnée 
             $sql = "SELECT * FROM `bateau` where `id` in (select max(`id`) from `bateau` group by `name`)";
             $requete = $bdd->query($sql);
