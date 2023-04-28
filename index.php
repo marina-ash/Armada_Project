@@ -14,6 +14,7 @@
         <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
         crossorigin=""> </script>
+        <script src="https://kit.fontawesome.com/c6b2aeabb6.js" crossorigin="anonymous"></script>
 
 
     </head>
@@ -26,7 +27,7 @@
         </header>  
 
         <div class="fond-1" id="accueil">
-            <nav id="bar">
+            <nav id="bar" class="navbar">
                 <ul class="menu-bar">
                     <li><a href="#accueil">Accueil</a></li>
                     <li><a href="#carte">Carte Maps</a></li>
@@ -59,15 +60,8 @@
         </div>
 
         <div class="fond-2" id="carte">
-
-           
             <h2>les positions de nos bateaux sur notre carte</h2>
-             
-            
-            <div id="map" class="map">
-                
-            </div>
-
+            <div id="map" class="map"> </div>
         </div>
 
         <div class="fond-3" id="reservation">
@@ -76,73 +70,99 @@
 
         <div class="fond-4" id= "presentation">
 
-            <section class="articles">
-            <article>
-                <div class="article-wrapper">
-                    <figure>
-                        <img src="https://picsum.photos/id/1011/800/450" alt="" />
-                    </figure>
-                    <div class="article-body">
-                        <h2>This is some title</h2>
-                        <p>
-                        Curabitur convallis ac quam vitae laoreet. Nulla mauris ante, euismod sed lacus sit amet, congue bibendum eros. Etiam mattis lobortis porta. Vestibulum ultrices iaculis enim imperdiet egestas.
-                        </p>
-                        <a href="#" class="read-more">
-                        Read more <span class="sr-only">about this is some title</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                        </a>
-                    </div>
-                </div>
-            </article>
-            <article>
-
-                <div class="article-wrapper">
-                    <figure>
-                        <img src="https://picsum.photos/id/1005/800/450" alt="" />
-                    </figure>
-                    <div class="article-body">
-                        <h2>This is some title</h2>
-                        <p>
-                        Curabitur convallis ac quam vitae laoreet. Nulla mauris ante, euismod sed lacus sit amet, congue bibendum eros. Etiam mattis lobortis porta. Vestibulum ultrices iaculis enim imperdiet egestas.
-                        </p>
-                        <a href="#" class="read-more">
-                        Read more <span class="sr-only">about this is some title</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                        </a>
-                    </div>
-                </div>
-            </article>
-            <article>
-
-                <div class="article-wrapper">
-                    <figure>
-                        <img src="https://picsum.photos/id/103/800/450" alt="" />
-                    </figure>
-                    <div class="article-body">
-                        <h2>This is some title</h2>
-                        <p>
-                        Curabitur convallis ac quam vitae laoreet. Nulla mauris ante, euismod sed lacus sit amet, congue bibendum eros. Etiam mattis lobortis porta. Vestibulum ultrices iaculis enim imperdiet egestas.
-                        </p>
-                        <a href="#" class="read-more">
-                        Read more <span class="sr-only">about this is some title</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                        </svg>
-                        </a>
-                    </div>
-                </div>
-            </article>
-            </section>
+            <div class="titleContainer">
+                <h2 class="text">Voici une petite présentation de notre équipe</h2>
+            </div>
             
-            <footer>
+            <div class="cardContainer">
+            <section>
+                <div class="container">
+                    <div class="content">
+                        <div class="cadre">
+                            <div class="cadre-content">
+                                <div class="image">
+                                    <img src="img/marina.jpg" alt="">
+                                </div>
+                                <div class="media-icons">
+                                    <a href="https://www.instagram.com/marinouille_76/"><i class="fa-brands fa-instagram" style="color: #042883; z-index: 2000;" > </i></a>
+                                    <a href="https://github.com/Marina-ASH"><i class="fa-brands fa-github" style="color: #042883; z-index: 2000;"></i></a>
+                                    <a href="https://www.linkedin.com/in/marina-ashraf-moris-b1a1b1217/"><i class="fa-brands fa-linkedin" style="color: #042883; z-index: 2000;"></i></a>
+                                </div>
+
+                                <div class="name-profession">
+                                    <span class="name">Marina ASHRAF</span>
+                                    <span class="profession">Etudient en BTS SN</span>    
+                                </div>
+
+                                <p class="description"> Mon nom est Marina AHRAF MORIS, et je suis actuellement en deuxième année d'études en informatique. Mon rôle dans ce projet consiste à gérer la localisation des bateaux, ainsi que leur affichage sur notre site web, qui a été conçu par mes soins. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+            <section>
+                <div class="container">
+                    <div class="content">
+                        <div class="cadre">
+                            <div class="cadre-content">
+                                <div class="image">
+                                    <img src="img/djem.jpg" alt="">
+                                </div>
+                                <div class="media-icons">
+                                    <a href="https://www.instagram.com/marinouille_76/"><i class="fa-brands fa-instagram" style="color: #042883; z-index: 2000;" > </i></a>
+                                    <a href="https://github.com/Marina-ASH"><i class="fa-brands fa-github" style="color: #042883; z-index: 2000;"></i></a>
+                                    <a href="https://www.linkedin.com/in/marina-ashraf-moris-b1a1b1217/"><i class="fa-brands fa-linkedin" style="color: #042883; z-index: 2000;"></i></a>
+                                </div>
+
+                                <div class="name-profession">
+                                    <span class="name">Djem Berkpinar</span>
+                                    <span class="profession">Etudient en BTS SN</span>    
+                                </div>
+
+                                <p class="description"> Mon nom est Marina AHRAF MORIS, et je suis actuellement en deuxième année d'études en informatique. Mon rôle dans ce projet consiste à gérer la localisation des bateaux, ainsi que leur affichage sur notre site web, qui a été conçu par mes soins. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="container">
+                    <div class="content">
+                        <div class="cadre">
+                            <div class="cadre-content">
+                                <div class="image">
+                                    <img src="img/matthias.jpg" alt="">
+                                </div>
+                                <div class="media-icons">
+                                    <a href="https://www.instagram.com/marinouille_76/"><i class="fa-brands fa-instagram" style="color: #042883; z-index: 2000;" > </i></a>
+                                    <a href="https://github.com/Marina-ASH"><i class="fa-brands fa-github" style="color: #042883; z-index: 2000;"></i></a>
+                                    <a href="https://www.linkedin.com/in/marina-ashraf-moris-b1a1b1217/"><i class="fa-brands fa-linkedin" style="color: #042883; z-index: 2000;"></i></a>
+                                </div>
+
+                                <div class="name-profession">
+                                    <span class="name">Matthias Bonnnard</span>
+                                    <span class="profession">Etudient en BTS SN</span>    
+                                </div>
+
+                                <p class="description"> Mon nom est Marina AHRAF MORIS, et je suis actuellement en deuxième année d'études en informatique. Mon rôle dans ce projet consiste à gérer la localisation des bateaux, ainsi que leur affichage sur notre site web, qui a été conçu par mes soins. </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </div>
+            
+            
+         
+            <footer >
                 <p>Copyright @2023 | Designed With by Marina ASHRAF MORIS</p>
             </footer>
-
         </div>
+
+       
 
         <?php 
            

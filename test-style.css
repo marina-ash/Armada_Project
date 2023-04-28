@@ -1,111 +1,28 @@
-html, body{
-    height: 100%;
+*{
     margin: 0;
     padding: 0;
-}
-body {
-     display: table;
-     width: 100%;
-}
-
-header{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 12cm;
-    width :100%;
-}
-/* --------------- Menu ---------------------*/
-.menu-bar {
-    border-radius: 50px;
-    height: fit-content;
-    display: inline-flex;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    align-items: center;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
-}
-.menu-bar li {
-    list-style: none;
-    color: #042883;
-    font-family: sans-serif;
-    font-weight: bold;
-    padding: 12px 16px;
-    margin: 0 8px;
-    position: relative;
-    cursor: pointer;
-    white-space: nowrap;
-}
-.menu-bar li::before {
-    content: " ";
-    position: absolute;
-    top: 0;
-    left: 0;
+    box-sizing: border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+  }
+  
+  section .card .image{
+    height: 140px;
+    width: 140px;
+    border-radius: 50%;
+    padding: 3px;
+    background: #ededed;
+  }
+  
+  section .card .image img{
     height: 100%;
     width: 100%;
-    z-index: -1;
-    transition: 0.2s;
-    border-radius: 25px;
-    
-}
-.menu-bar li:hover {
-    color: #ededed;
-}
- 
-.menu-bar li:hover::before {
-    background: linear-gradient(to bottom, #ededed, #042883);
-    box-shadow: 0px 3px 20px 0px rgb(13, 13, 13);
-    transform: scale(1.2);
-}
-
-a{
-    text-decoration: none;
-    color: #000;
-}
-
-/*------------- Premier page ----------------*/
-strong{
-    position: relative;
-      font-size: 20px;
-      text-align: center;
-      color: #050405;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 2em;
-}
-  
-  .cercle{
-    width: 545px;
-    height: 382px;
+    object-fit: cover;
     border-radius: 50%;
-    background-image: url('img/armada.png');
-    background-size: cover;
-    float: left;
-    margin-right: 77px;
-    padding-left: 50px;
-    padding-right: 50px;
-}
+  }
   
-  strong{
-    margin-left: 130px;
-    padding-left: 50px;
-    padding-right: 50px;
-}
-
-h1{
-    text-align: center;
-    margin-top: 50px;
-    color: #042883;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
-}   
-
-.fond-1{
-    background-image: url(img/fond-1.svg);
-    height: 1000px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
+  body{
+    height: 100vh;
     display: flex;
-    flex-direction: column;
- }
+    align-items: center;
+    justify-content: center;
+  }
