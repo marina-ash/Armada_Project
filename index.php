@@ -60,7 +60,9 @@
         </div>
 
         <div class="fond-2" id="carte">
-            <h2>les positions de nos bateaux sur notre carte</h2>
+        
+            <h2 class="text">Vous pouvez suivre nos bateaux</h2>
+            
             <div id="map" class="map"> </div>
         </div>
 

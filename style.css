@@ -15,7 +15,7 @@ header{
    display: flex;
    justify-content: center;
    align-items: center;
-   height: 12cm;
+   height: 15cm;
    width :100%;
  }
 
@@ -26,15 +26,18 @@ h1{
    color: #042883;
    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
    font-weight: bold;
+   
 }
 
 h2{
    text-align: center;
    color: #ededed;
    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
-   margin-top: 40px;
    font-weight: bold;
+   text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+   
 }
+
  
 .navbar {
   position: relative;
@@ -49,12 +52,13 @@ h2{
 
 .fond-1{
    background-image: url(img/fond-1.svg);
-   height: 1000px;
+   height: 873px;
    background-repeat: no-repeat;
    background-size: cover;
    position: relative;
    display: flex;
    flex-direction: column;
+   
 }
 
  .fond-3{
@@ -92,6 +96,7 @@ h2{
    display: flex;
    justify-content: center;
    align-items: top;
+   padding: 80px;
 }
 
 footer{
@@ -118,6 +123,7 @@ a{
     z-index: 1000;
     background-color: #ffffff;
     box-shadow: 0px 13px 45px -18px #111;
+    font-family:Arial, Helvetica, sans-serif;
   }
  .menu-bar li {
     list-style: none;
@@ -174,16 +180,19 @@ a{
     color: #000000;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 2em;
+    padding-left: 80px;
+    padding-right: 80px;
+    
  }
  
  .map{
-   height: 583px;
+   height: 688px;
    width: 1050px;
    margin-left: auto;
    margin-right: auto;
    border-radius: 6%;
    border: 1em solid #ededed;
-   margin-top: 154px;
+   margin-top: 59px;
    position: absolute;
 }
 
@@ -321,5 +330,9 @@ section .cadre .image img{
 .text{
    color: rgb(255, 255, 255);
    font-weight: bold;
-   margin-top: -70px;
+   margin-top: -12px;
+   text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+   text-align: center;
+   
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
 }
