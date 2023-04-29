@@ -52,7 +52,7 @@ h2{
 
 .fond-1{
    background-image: url(img/fond-1.svg);
-   height: 873px;
+   height: 1194px;
    background-repeat: no-repeat;
    background-size: cover;
    position: relative;
@@ -63,7 +63,7 @@ h2{
 
  .fond-3{
    background-image: url(img/fond-3.svg);
-   height: 1000px;
+   height: 1194px;
    background-repeat: no-repeat;
    background-size: cover;
    position: relative;
@@ -84,12 +84,13 @@ h2{
    background-repeat: no-repeat;
    background-size: cover;
    position: relative;
-   padding: 77px;
+   padding: 150px;
+
 }
 
 .fond-2{
    background-image: url(img/fond-2.svg);
-   height: 1165px;
+   height: 1195px;
    background-repeat: no-repeat;
    background-size: cover;
    position: relative;
@@ -333,6 +334,6 @@ section .cadre .image img{
    margin-top: -12px;
    text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
    text-align: center;
-   
    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+   font-size: x-large;
 }

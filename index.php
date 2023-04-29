@@ -1,6 +1,7 @@
 <?php
  include('connexionbdd.php');
  ?>
+ 
 <!DOCTYPE html>
 <html>
     <head>
@@ -113,9 +114,9 @@
                                     <img src="img/djem.jpg" alt="">
                                 </div>
                                 <div class="media-icons">
-                                    <a href="https://www.instagram.com/marinouille_76/"><i class="fa-brands fa-instagram" style="color: #042883; z-index: 2000;" > </i></a>
-                                    <a href="https://github.com/Marina-ASH"><i class="fa-brands fa-github" style="color: #042883; z-index: 2000;"></i></a>
-                                    <a href="https://www.linkedin.com/in/marina-ashraf-moris-b1a1b1217/"><i class="fa-brands fa-linkedin" style="color: #042883; z-index: 2000;"></i></a>
+                                    <a href="https://www.instagram.com/djem_brk/"><i class="fa-brands fa-instagram" style="color: #042883; z-index: 2000;" > </i></a>
+                                    <a href="https://github.com/Djembrk"><i class="fa-brands fa-github" style="color: #042883; z-index: 2000;"></i></a>
+                                    <a href="https://www.linkedin.com/in/djem-berkpinar/"><i class="fa-brands fa-linkedin" style="color: #042883; z-index: 2000;"></i></a>
                                 </div>
 
                                 <div class="name-profession">
@@ -139,9 +140,9 @@
                                     <img src="img/matthias.jpg" alt="">
                                 </div>
                                 <div class="media-icons">
-                                    <a href="https://www.instagram.com/marinouille_76/"><i class="fa-brands fa-instagram" style="color: #042883; z-index: 2000;" > </i></a>
+                                    <a href="https://www.instagram.com/matthias_bnd/"><i class="fa-brands fa-instagram" style="color: #042883; z-index: 2000;" > </i></a>
                                     <a href="https://github.com/Marina-ASH"><i class="fa-brands fa-github" style="color: #042883; z-index: 2000;"></i></a>
-                                    <a href="https://www.linkedin.com/in/marina-ashraf-moris-b1a1b1217/"><i class="fa-brands fa-linkedin" style="color: #042883; z-index: 2000;"></i></a>
+                                    <a href="https://www.linkedin.com/in/matthias-bonnard-403449239/"><i class="fa-brands fa-linkedin" style="color: #042883; z-index: 2000;"></i></a>
                                 </div>
 
                                 <div class="name-profession">
@@ -168,7 +169,6 @@
 
         <?php 
            
-          
             // Requete de trie de donnée 
             $sql = "SELECT * FROM `bateau` where `id` in (select max(`id`) from `bateau` group by `name`)";
             $requete = $bdd->query($sql);

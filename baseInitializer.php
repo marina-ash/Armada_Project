@@ -1,6 +1,6 @@
 ​<?php
  include('connexionbdd.php');
- ?>
+?>
  
 <html>
   <body>
