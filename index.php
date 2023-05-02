@@ -61,12 +61,26 @@
         </div>
 
         <div class="fond-2" id="carte">
-        
-            <h2 class="text">Vous pouvez suivre nos bateaux</h2>
-            
-            <div id="map" class="map"> </div>
-        </div>
 
+            <section>
+                <div class="containermap">
+                    <div class="colonne"><h2 class="text">Vous pouvez suivre nos bateaux</h2></div>
+                    <div id="map" class="map"> </div>
+                    <div class="colonne">
+                        <div>
+                            <span id="rangeValue">0</span>
+                            <Input class="range" type="range" name "" value="0" min="0" max="1000" onChange="rangeSlide(this.value)" onmousemove="rangeSlide(this.value)"></Input>
+                        </div>
+                        <script type="text/javascript">
+                            function rangeSlide(value) {document.getElementById('rangeValue').innerHTML = value;}
+                        </script>
+                    </div>
+                </div>
+            </section>
+            
+            
+        </div>
+        
         <div class="fond-3" id="reservation">
             <div id="Réservations" class="réservation"></div>
         </div>
@@ -124,7 +138,7 @@
                                     <span class="profession">Etudient en BTS SN</span>    
                                 </div>
 
-                                <p class="description"> Mon nom est Marina AHRAF MORIS, et je suis actuellement en deuxième année d'études en informatique. Mon rôle dans ce projet consiste à gérer la localisation des bateaux, ainsi que leur affichage sur notre site web, qui a été conçu par mes soins. </p>
+                                <p class="description"> Mon nom est Djem BERKPINAR, étudiant en 2 ème année de BTS informatique et réseaux . Mon rôle est de concevoir un système embarqué capable de detecter la présence de visiteurs entrant sur les bateaux . Je developpe aussi l'application mobile de l'équipage permettant la gestion de visiteurs au sein du bateaux </p>
                             </div>
                         </div>
                     </div>
@@ -141,7 +155,7 @@
                                 </div>
                                 <div class="media-icons">
                                     <a href="https://www.instagram.com/matthias_bnd/"><i class="fa-brands fa-instagram" style="color: #042883; z-index: 2000;" > </i></a>
-                                    <a href="https://github.com/Marina-ASH"><i class="fa-brands fa-github" style="color: #042883; z-index: 2000;"></i></a>
+                                    <a href=""><i class="fa-brands fa-github" style="color: #042883; z-index: 2000;"></i></a>
                                     <a href="https://www.linkedin.com/in/matthias-bonnard-403449239/"><i class="fa-brands fa-linkedin" style="color: #042883; z-index: 2000;"></i></a>
                                 </div>
 
@@ -150,7 +164,7 @@
                                     <span class="profession">Etudient en BTS SN</span>    
                                 </div>
 
-                                <p class="description"> Mon nom est Marina AHRAF MORIS, et je suis actuellement en deuxième année d'études en informatique. Mon rôle dans ce projet consiste à gérer la localisation des bateaux, ainsi que leur affichage sur notre site web, qui a été conçu par mes soins. </p>
+                                <p class="description"> Je m'appelle Matthias BONNARD et je suis actuellement en 2eme année de BTS SN. Dans ce projet mon role est de créer et héberger le serveur web ainsi que la page de réservation </p>
                             </div>
                         </div>
                     </div>
@@ -158,14 +172,21 @@
             </section>
             </div>
             
-            
-         
-            <footer >
-                <p>Copyright @2023 | Designed With by Marina ASHRAF MORIS</p>
-            </footer>
         </div>
 
-       
+        <footer >
+            <div class="footerContainer">
+                <div class="socialInons">
+                    <a href="" > <i class="fa-brands fa-github" style="color: #0e2983;"></i> </a>
+                    <a href="" > <i class="fa-brands fa-linkedin" style="color: #0e2983;"></i></i> </a>
+                </div>
+        
+                <div class="footerBottom">
+                     <p>Copyright &copy;2023; Designed by <span class="designer"> Marina ASHRAF MORIS</span> </p>
+                </div>
+
+            </div>
+        </footer>
 
         <?php 
            
