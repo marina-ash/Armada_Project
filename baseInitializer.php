@@ -22,8 +22,8 @@
            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE); // Vérifier la certification SSL et false pour la désactiver
  
-           $xml = curl_exec($curl);
-           curl_close($curl);
+           $xml = curl_exec($curl); //Ouvre la connexion
+           curl_close($curl); //Ferme la connexion API
           
            //Passer de XML en Json
            $xml = simplexml_load_string($xml, "SimpleXMLElement", LIBXML_NOCDATA);
@@ -64,8 +64,8 @@
            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE); // Vérifier la certification SSL et false pour la désactiver
  
-           $xml = curl_exec($curl);
-           curl_close($curl);
+           $xml = curl_exec($curl); //Ouvre la connexion
+           curl_close($curl); //Ferme la connexion API
            
            //Passer de XML en Json
            $xml = simplexml_load_string($xml, "SimpleXMLElement", LIBXML_NOCDATA);
