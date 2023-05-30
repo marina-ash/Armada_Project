@@ -111,7 +111,7 @@
                                     <span class="profession">Etudient en BTS SN</span>    
                                 </div>
 
-                                <p class="description"> Mon nom est Marina AHRAF MORIS, et je suis actuellement en deuxième année d'études en informatique. Mon rôle dans ce projet consiste à gérer la localisation des bateaux, ainsi que leur affichage sur notre site web, qui a été conçu par mes soins. </p>
+                                <p class="description"> Mon nom Marina AHRAF MORIS, et je suis actuellement en deuxième année d'études en informatique. Mon rôle dans ce projet consiste à gérer la localisation des bateaux, ainsi que leur affichage sur notre site web, qui a été conçu par mes soins. Mais aussi de géner le code tout les jours pour mettre à jour les position des bateaux. </p>
                             </div>
                         </div>
                     </div>
@@ -164,7 +164,7 @@
                                     <span class="profession">Etudient en BTS SN</span>    
                                 </div>
 
-                                <p class="description"> Je m'appelle Matthias BONNARD et je suis actuellement en 2eme année de BTS SN. Dans ce projet mon role est de créer et héberger le serveur web ainsi que la page de réservation </p>
+                                <p class="description"> Je m'appelle Matthias BONNARD et je suis actuellement en 2eme année de BTS SN. Dans ce projet mon rôle est de créer et héberger le serveur web ainsi que la page de réservation. Je me charge de l'envoi d'un QRcode avec les informations de réservation par mail au utilisateur </p>
                             </div>
                         </div>
                     </div>
@@ -191,7 +191,7 @@
         <?php 
            
             // Requete de trie de donnée 
-            $sql = "SELECT * FROM `bateau` where `id` in (select max(`id`) from `bateau` group by `name`)";
+            $sql = "SELECT * FROM `position` where `id_position` in (select max(`id`) from `position` group by `name`)";
             $requete = $bdd->query($sql);
             $donnees = $requete->fetchAll(PDO::FETCH_ASSOC);
 

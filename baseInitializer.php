@@ -41,7 +41,7 @@
            $item = isset ($xml['@attributes']) ? $xml['@attributes'] : (is_array($xml) ? $xml[count($xml)-1]['@attributes'] : null);
            echo $item['MMSI'] . "     :     " . $item['LAT'] . "    :   " . $item['LON'] .  "   :   " . $item['TIMESTAMP']. "   :   " . $nameMMSI."<br>";
  
-           $sql = "INSERT INTO bateau (name, lat, lon, timestamp) VALUES (:nameMMSI, :lat, :lon, :timestamp)";
+           $sql = "INSERT INTO position (name, lat, lon, timestamp) VALUES (:nameMMSI, :lat, :lon, :timestamp)";
  
              try {
                  $stmt = $bdd->prepare($sql);
@@ -83,7 +83,7 @@
            $item = isset ($xml['@attributes']) ? $xml['@attributes'] : (is_array($xml) ? $xml[count($xml)-1]['@attributes'] : null);
            echo $item['MMSI'] . "     :     " . $item['LAT'] . "    :   " . $item['LON'] .  "   :   " . $item['TIMESTAMP']. "   :   " . $nameIMO."<br>";
  
-           $sql = "INSERT INTO bateau (name, lat, lon, timestamp) VALUES (:nameIMO, :lat, :lon, :timestamp)";
+           $sql = "INSERT INTO position (name, lat, lon, timestamp) VALUES (:nameIMO, :lat, :lon, :timestamp)";
  
              try {
                  $stmt = $bdd->prepare($sql);
