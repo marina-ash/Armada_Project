@@ -82,7 +82,10 @@
         </div>
         
         <div class="fond-3" id="reservation">
-            <div id="Réservations" class="réservation"></div>
+            <div id="Réservations" class="réservation">
+                <h2 class="text">Pour réserver c'est par ici!</h2>
+                <button class="learn-more">Réservation</button>
+            </div>
         </div>
 
         <div class="fond-4" id= "presentation">
