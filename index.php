@@ -188,30 +188,32 @@
             </div>
         </footer>
 
-        <?php 
-           
-            // Requete de trie de donnée 
-            $sql = "SELECT * FROM `position` where `id_position` in (select max(`id`) from `position` group by `name`)";
-            $requete = $bdd->query($sql);
-            $donnees = $requete->fetchAll(PDO::FETCH_ASSOC);
+        <?php
+    // Requête de récupération des dernières positions des bateaux
+    $sql = "SELECT bateaux.nom, position.lat, position.lon
+            FROM `position`
+            INNER JOIN `bateaux` ON position.id_bateaux = bateaux.id_bateaux
+            WHERE position.timestamp = (
+                SELECT MAX(timestamp)
+                FROM `position`
+                WHERE position.id_bateaux = bateaux.id_bateaux
+            )";
+    $requete = $bdd->query($sql);
+    $donnees = $requete->fetchAll(PDO::FETCH_ASSOC);
+?>
 
-        ?>
+<script>
+    var map = L.map('map').setView([50.06, 1.49], 13); // zone d'affichage de la carte
+    <?php foreach ($donnees as $row): ?>
+        var marker = L.marker([<?= $row["lat"] ?>, <?= $row["lon"] ?>]); // placer un marqueur sur la position du bateau
+        marker.addTo(map);
+        marker.bindPopup('<?= $row['nom'] ?>').openPopup(); // afficher le nom du bateau
+    <?php endforeach; ?>
 
-        <script>
-        
-            var map = L.map('map').setView([50.06, 1.49], 13); // zonne d'affiche de maps
-            let marker;
-            <?php foreach ($donnees as $row ): ?>
-                    marker = L.marker(['<?= $row["lat"] ?>','<?= $row["lon"] ?>']); // mettre un marker sur la position du bateau
-                    marker.addTo(map);
-                    marker.bindPopup('<?= $row['name'] ?>').openPopup(); // afficher le nom du bateau
-            <?php endforeach; ?>
-            
-            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                maxZoom: 20,
-                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-            }).addTo(map);
-        </script>
-      
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 20,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+</script>
     </body>
 </html>
