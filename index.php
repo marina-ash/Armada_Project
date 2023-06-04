@@ -31,7 +31,7 @@
             <nav id="bar" class="navbar">
                 <ul class="menu-bar">
                     <li><a href="#accueil">Accueil</a></li>
-                    <li><a href="#carte">Carte Maps</a></li>
+                    <li><a href="#carte">Carte</a></li>
                     <li><a href="#reservation">Réservations</a></li>
                     <li><a href="#presentation">Qui sommes nous?</a></li>
                 </ul>
@@ -82,7 +82,10 @@
         </div>
         
         <div class="fond-3" id="reservation">
-            <div id="Réservations" class="réservation"></div>
+            <div id="Réservations" class="réservation">
+                <h2 class="reservation">Pour réserver cliquer sur réservation</h2>
+                <button class='glowing-btn'><span class='glowing-txt'>Rés<span class='faulty-letter'>erv</span>ation</span></button>
+            </div>
         </div>
 
         <div class="fond-4" id= "presentation">
@@ -189,8 +192,8 @@
         </footer>
 
         <?php
-    // Requête de récupération des dernières positions des bateaux
-    $sql = "SELECT bateaux.nom, position.lat, position.lon
+            // Requête de récupération des dernières positions des bateaux
+            $sql = "SELECT bateaux.nom, position.lat, position.lon
             FROM `position`
             INNER JOIN `bateaux` ON position.id_bateaux = bateaux.id_bateaux
             WHERE position.timestamp = (
@@ -198,22 +201,22 @@
                 FROM `position`
                 WHERE position.id_bateaux = bateaux.id_bateaux
             )";
-    $requete = $bdd->query($sql);
-    $donnees = $requete->fetchAll(PDO::FETCH_ASSOC);
-?>
+            $requete = $bdd->query($sql);
+            $donnees = $requete->fetchAll(PDO::FETCH_ASSOC);
+        ?>
 
-<script>
-    var map = L.map('map').setView([50.06, 1.49], 13); // zone d'affichage de la carte
-    <?php foreach ($donnees as $row): ?>
-        var marker = L.marker([<?= $row["lat"] ?>, <?= $row["lon"] ?>]); // placer un marqueur sur la position du bateau
-        marker.addTo(map);
-        marker.bindPopup('<?= $row['nom'] ?>').openPopup(); // afficher le nom du bateau
-    <?php endforeach; ?>
+        <script>
+            var map = L.map('map').setView([50.06, 1.49], 13); // zone d'affichage de la carte
+            <?php foreach ($donnees as $row): ?>
+            var marker = L.marker([<?= $row["lat"] ?>, <?= $row["lon"] ?>]); // placer un marqueur sur la position du bateau
+            marker.addTo(map);
+            marker.bindPopup('<?= $row['nom'] ?>').openPopup(); // afficher le nom du bateau
+            <?php endforeach; ?>
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 20,
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(map);
-</script>
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+             maxZoom: 20,
+             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+        </script>
     </body>
 </html>
