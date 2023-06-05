@@ -197,9 +197,9 @@
             FROM `position`
             INNER JOIN `bateaux` ON position.id_bateaux = bateaux.id_bateaux
             WHERE position.timestamp = (
-                SELECT MAX(timestamp)
-                FROM `position`
-                WHERE position.id_bateaux = bateaux.id_bateaux
+            SELECT MAX(timestamp)
+            FROM `position`
+            WHERE position.id_bateaux = bateaux.id_bateaux
             )";
             $requete = $bdd->query($sql);
             $donnees = $requete->fetchAll(PDO::FETCH_ASSOC);
