@@ -193,24 +193,19 @@
 
         <?php
             // Requête de récupération des dernières positions des bateaux
-            $sql = "SELECT bateaux.nom, position.lat, position.lon
-            FROM `position`
-            INNER JOIN `bateaux` ON position.id_bateaux = bateaux.id_bateaux
-            WHERE position.timestamp = (
-            SELECT MAX(timestamp)
-            FROM `position`
-            WHERE position.id_bateaux = bateaux.id_bateaux
-            )";
+            $sql= "SELECT *  FROM `position` inner join bateaux on position.id_bateaux = bateaux.id_bateaux where `id_position` 
+            in (select max(`id_position`) from `position` group by `id_bateaux`);";
             $requete = $bdd->query($sql);
             $donnees = $requete->fetchAll(PDO::FETCH_ASSOC);
         ?>
 
         <script>
-            var map = L.map('map').setView([50.06, 1.49], 13); // zone d'affichage de la carte
+            var donnees = <?php echo json_encode($donnees); ?>
+            var map = L.map('map').setView([51.505, -0.09], 13); // zone d'affichage de la carte
             <?php foreach ($donnees as $row): ?>
-            var marker = L.marker([<?= $row["lat"] ?>, <?= $row["lon"] ?>]); // placer un marqueur sur la position du bateau
-            marker.addTo(map);
-            marker.bindPopup('<?= $row['nom'] ?>').openPopup(); // afficher le nom du bateau
+                var marker = L.marker([<?= $row["lat"] ?>, <?= $row["lon"] ?>]); // placer un marqueur sur la position du bateau
+                marker.addTo(map);
+                marker.bindPopup('<?= $row['nom'] ?>').openPopup(); // afficher le nom du bateau
             <?php endforeach; ?>
 
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
