@@ -66,15 +66,56 @@
                 <div class="containermap">
                     <div class="colonne"><h2 class="text">Vous pouvez suivre nos bateaux</h2></div>
                     <div id="map" class="map"> </div>
-                    <div class="colonne">
-                        <div>
-                            <span id="rangeValue">0</span>
-                            <Input class="range" type="range" name "" value="0" min="0" max="1000" onChange="rangeSlide(this.value)" onmousemove="rangeSlide(this.value)"></Input>
-                        </div>
-                        <script type="text/javascript">
-                            function rangeSlide(value) {document.getElementById('rangeValue').innerHTML = value;}
-                        </script>
-                    </div>
+
+                    <?php
+
+                        function listAllDates($db) {
+                            $request = "SELECT DISTINCT DATE(timestamp) as date from position order by DATE(timestamp) desc";    
+                            $statement = $db->query($request);
+                            return $statement->fetchAll(PDO::FETCH_ASSOC);
+                        }
+
+                        function getBoatPositions($db, $date) {
+                            $request = "SELECT *  
+                            FROM `position` 
+                            inner join bateaux 
+                                on position.id_bateaux = bateaux.id_bateaux 
+                            where `id_position` in (select max(`id_position`) from `position` where date(timestamp)=:date group by `id_bateaux`)
+                                and date(timestamp)=:date;";    
+
+
+                            $statement = $db->prepare($request);
+                            $statement->execute(['date' => $date]);
+                            return $statement->fetchAll(PDO::FETCH_ASSOC);
+                        }
+
+                        // Convertir objet date -> valeur à un tableau de date
+                        $dates = array_map(function($item) {
+                            return $item['date'];
+                        }, listAllDates($bdd));
+
+                        /*
+                        Tableau sous la forme
+                        [
+                            '2023-06-12' => [
+                                position1,
+                                position2,...
+                            ],
+                            '2023-06-11' => [...]
+                        ]
+                        */
+                        $positions = [];
+                        foreach($dates as $date) {
+                            $positions[$date] = getBoatPositions($bdd, $date);
+                        }
+
+                    ?>
+
+                    <select id="select-date"  class="box">
+                        <?php foreach($dates as $key => $value  ): ?>
+                        <option value="<?= $value ?>"><?= $value ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </section>
             
@@ -180,8 +221,8 @@
         <footer >
             <div class="footerContainer">
                 <div class="socialInons">
-                    <a href="" > <i class="fa-brands fa-github" style="color: #0e2983;"></i> </a>
-                    <a href="" > <i class="fa-brands fa-linkedin" style="color: #0e2983;"></i></i> </a>
+                    <a href="https://github.com/Marina-ASH" > <i class="fa-brands fa-github" style="color: #0e2983;"></i> </a>
+                    <a href="https://www.linkedin.com/in/marina-ashraf-moris-b1a1b1217/" > <i class="fa-brands fa-linkedin" style="color: #0e2983;"></i></i> </a>
                 </div>
         
                 <div class="footerBottom">
@@ -195,22 +236,42 @@
             // Requête de récupération des dernières positions des bateaux
             $sql= "SELECT *  FROM `position` inner join bateaux on position.id_bateaux = bateaux.id_bateaux where `id_position` 
             in (select max(`id_position`) from `position` group by `id_bateaux`);";
+            $query = "SELECT nom, placeDispo, lat, lon FROM bateau";
             $requete = $bdd->query($sql);
             $donnees = $requete->fetchAll(PDO::FETCH_ASSOC);
         ?>
 
         <script>
-            var donnees = <?php echo json_encode($donnees); ?>
-            var map = L.map('map').setView([51.505, -0.09], 13); // zone d'affichage de la carte
-            <?php foreach ($donnees as $row): ?>
-                var marker = L.marker([<?= $row["lat"] ?>, <?= $row["lon"] ?>]); // placer un marqueur sur la position du bateau
-                marker.addTo(map);
-                marker.bindPopup('<?= $row['nom'] ?>').openPopup(); // afficher le nom du bateau
-            <?php endforeach; ?>
+            // Récupèration des positions
+            const positions = <?= json_encode($positions); ?>;
+            // Récupèration de la date par défaut
+            const nearestDay = Object.keys(positions)[0];
+
+            var donnees = <?php echo json_encode($donnees); ?>;
+            var map = L.map('map').setView([49.4431, 1.0993], 14); // zone d'affichage de la carte
+            const markers = L.layerGroup().addTo(map);
+
+            // Supprime tout les markers sur la carte et créer de nouveaux markers correspondants aux positions de la date voulue
+            const drawPositionsOnMap = (date) => {
+                // Suppression de toutes les positions sur la carte
+                markers.clearLayers();
+                // Création de toute les nouvelles positions sur la carte
+                positions[date].forEach(function(row) {
+                    var marker = L.marker([row.lat, row.lon]);
+                    marker.bindPopup(row.nom + ' - Places disponibles : ' + row.placeDispo).openPopup();
+                    marker.addTo(markers)
+                }); 
+            }
+
+            // Affichage des positions par defaut
+            drawPositionsOnMap(nearestDay);
+
+            // Event qui à chaque changement de date met à jour les positions sur la carte
+            document.querySelector('#select-date').addEventListener('change', (event) => drawPositionsOnMap(event.target.value))
 
             L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-             maxZoom: 20,
-             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                maxZoom: 20,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             }).addTo(map);
         </script>
     </body>

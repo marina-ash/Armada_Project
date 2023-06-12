@@ -660,3 +660,12 @@ section .cadre .image img{
  .reservation{
     margin-top: 60px;
  }
+
+ .box{
+  margin-top: 20px; 
+  top: 50%; left: 50%; 
+  border: 33px solid #e2eded; 
+  border-color: #A5C1D8 #ffffff #A5C1D8 #ffffff;
+  
+
+ }
