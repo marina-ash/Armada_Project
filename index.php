@@ -76,10 +76,10 @@
                         }
 
                         function getBoatPositions($db, $date) {
-                            $request = "SELECT *  
-                            FROM `position` 
+                            $request = "SELECT p.lat, p.lon, bateaux.nom, bateaux.placeDispo  
+                            FROM `position` p
                             inner join bateaux 
-                                on position.id_bateaux = bateaux.id_bateaux 
+                                on p.id_bateaux = bateaux.id_bateaux 
                             where `id_position` in (select max(`id_position`) from `position` where date(timestamp)=:date group by `id_bateaux`)
                                 and date(timestamp)=:date;";    
 
@@ -93,6 +93,7 @@
                         $dates = array_map(function($item) {
                             return $item['date'];
                         }, listAllDates($bdd));
+
 
                         /*
                         Tableau sous la forme
@@ -232,22 +233,12 @@
             </div>
         </footer>
 
-        <?php
-            // Requête de récupération des dernières positions des bateaux
-            $sql= "SELECT *  FROM `position` inner join bateaux on position.id_bateaux = bateaux.id_bateaux where `id_position` 
-            in (select max(`id_position`) from `position` group by `id_bateaux`);";
-            $query = "SELECT nom, placeDispo, lat, lon FROM bateau";
-            $requete = $bdd->query($sql);
-            $donnees = $requete->fetchAll(PDO::FETCH_ASSOC);
-        ?>
-
         <script>
             // Récupèration des positions
             const positions = <?= json_encode($positions); ?>;
             // Récupèration de la date par défaut
             const nearestDay = Object.keys(positions)[0];
 
-            var donnees = <?php echo json_encode($donnees); ?>;
             var map = L.map('map').setView([49.4431, 1.0993], 14); // zone d'affichage de la carte
             const markers = L.layerGroup().addTo(map);
 
