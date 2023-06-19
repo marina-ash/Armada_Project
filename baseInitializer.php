@@ -17,7 +17,8 @@
 
         foreach ($tableauBateauxMMSI as $idMMSI => $nameMMSI){
           $curl = curl_init();
-          curl_setopt($curl, CURLOPT_URL, "https://services.marinetraffic.com/api/exportvesseltrack/v:3/$api_key/period:daily/days:1/mmsi:$idMMSI/protocol:xml");
+          curl_setopt($curl, CURLOPT_URL, "https://services.marinetraffic.com/api/exportvesseltrack/v:3/
+          $api_key/period:daily/days:1/mmsi:$idMMSI/protocol:xml");
           curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
           curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE); // Vérifier la certification SSL et false pour la désactiver
   
@@ -36,24 +37,28 @@
             return; // Quitte la fonction en cours
           }
   
-          $xml = isset($xml['POSITION']) ? $xml['POSITION'] : null;
+          $xml = isset($xml['POSITION']) ? $xml['POSITION'] : null; 
+          //Récupère les données de position du bateau et les assigne à la variable $xml
+          
+          // Vérifie si les attributs de position existent dans $xml, sinon récupère le dernier élément du tableau $xml et ses attributs
+          $item = isset ($xml['@attributes']) ? $xml['@attributes'] : (is_array($xml) ? $xml[count($xml)-1]['@attributes'] : null); 
+          echo $item['MMSI'] . "     :     " . $item['LAT'] . "    :   " . $item['LON'] .  "   :   " . $item['TIMESTAMP']. "  
+           :   " . $nameMMSI."<br>"; // Affiche les valeurs des attributs
+
   
-          $item = isset ($xml['@attributes']) ? $xml['@attributes'] : (is_array($xml) ? $xml[count($xml)-1]['@attributes'] : null);
-          echo $item['MMSI'] . "     :     " . $item['LAT'] . "    :   " . $item['LON'] .  "   :   " . $item['TIMESTAMP']. "   :   " . $nameMMSI."<br>";
-  
-          $sql = "INSERT INTO position (lat, lon, timestamp, id_bateaux) VALUES (:lat, :lon, :timestamp, SELECT bateaux.id_bateaux FROM bateaux WHERE bateaux.MMSI = :nameMMSI)";
-  
+          $sql = "INSERT INTO position (lat, lon, timestamp, id_bateaux) VALUES 
+          (:lat, :lon, :timestamp, SELECT bateaux.id_bateaux FROM bateaux WHERE bateaux.MMSI = :nameMMSI)";
           try {
-            $stmt = $bdd->prepare($sql);
-            $stmt->bindParam(':nameMMSI', $nameMMSI);
-            $stmt->bindParam(':lat', $item['LAT']);
-            $stmt->bindParam(':lon', $item['LON']);
-            $stmt->bindParam(':timestamp', $item['TIMESTAMP']);
-            $stmt->execute();
-            echo "New record created successfully<br>";
+            $stmt = $bdd->prepare($sql); // Prépare la requête SQL
+            $stmt->bindParam(':nameMMSI', $nameMMSI); // Lie la valeur de $nameMMSI au paramètre :nameMMSI
+            $stmt->bindParam(':lat', $item['LAT']); // Lie la valeur de $item['LAT'] au paramètre :lat
+            $stmt->bindParam(':lon', $item['LON']); // Lie la valeur de $item['LON'] au paramètre :lon
+            $stmt->bindParam(':timestamp', $item['TIMESTAMP']);// Lie la valeur de $item['TIMESTAMP'] au paramètre :timestamp
+            $stmt->execute(); // Exécute la requête SQL
+            echo "New record created successfully<br>"; // Affiche un message en cas de succès de l'insertion
           } 
           catch(PDOException $e) {
-            echo "Error: " . $e->getMessage();
+            echo "Error: " . $e->getMessage(); // Affiche un message d'erreur en cas d'échec de l'insertion
           }
         }
     

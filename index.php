@@ -71,8 +71,8 @@
 
                         function listAllDates($db) {
                             $request = "SELECT DISTINCT DATE(timestamp) as date from position order by DATE(timestamp) desc";    
-                            $statement = $db->query($request);
-                            return $statement->fetchAll(PDO::FETCH_ASSOC);
+                            $statement = $db->query($request); // Exécute la requête SQL
+                            return $statement->fetchAll(PDO::FETCH_ASSOC); // Renvoie les résultats sous forme de tableau associatif
                         }
 
                         function getBoatPositions($db, $date) {
@@ -84,9 +84,9 @@
                                 and date(timestamp)=:date;";    
 
 
-                            $statement = $db->prepare($request);
-                            $statement->execute(['date' => $date]);
-                            return $statement->fetchAll(PDO::FETCH_ASSOC);
+                            $statement = $db->prepare($request); // Prépare la requête SQL
+                            $statement->execute(['date' => $date]); // Exécute la requête SQL en remplaçant le paramètre :date par la valeur spécifiée
+                            return $statement->fetchAll(PDO::FETCH_ASSOC); 
                         }
 
                         // Convertir objet date -> valeur à un tableau de date
