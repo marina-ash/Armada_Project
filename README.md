@@ -56,7 +56,7 @@ Un site pour l'armada pour localiser les bateaux de l'armada mais aussi réserve
 * JavaScript
 
 # Comment utiliser le site
-Pour accéder au site, vous pouvez simplement ouvrir le fichier index.html dans votre navigateur web préféré.
+Pour accéder au site, vous pouvez simplement télécharger le projet et ouvrir le fichier index.html dans votre navigateur web préféré.
 
 # Contributions
 Les contributions à ce projet sont les bienvenues ! Si vous souhaitez apporter des améliorations ou corriger des bugs, n'hésitez pas à ouvrir une pull request.
